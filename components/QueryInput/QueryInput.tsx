@@ -6,7 +6,7 @@ import "highlight.js/styles/github-dark.css";
 import React from "react";
 import { toast } from "sonner";
 import styles from "./queryInput.module.css";
-import { Copy } from "lucide-react";
+import { Copy, Pin } from "lucide-react";
 hljs.registerLanguage("sql", sql);
 
 function QueryInput() {
@@ -41,6 +41,7 @@ function QueryInput() {
 				<div
 					ref={highlightedDivRef}
 					className={styles.highlightedQuery}
+					// biome-ignore lint/security/noDangerouslySetInnerHtml: <explanation>
 					dangerouslySetInnerHTML={{ __html: highlightQuery(query) }}
 				/>
 
@@ -55,31 +56,50 @@ function QueryInput() {
 				/>
 			</div>
 			<div className={styles.buttonContainer}>
-				<button
-					type="button"
-					className={styles.button}
-					onClick={() => toast("Query executed!")}
-				>
-					Execute Query
-				</button>
-				<button type="button" className={styles.button} onClick={() => {
-					setQuery("");
-					toast("Query cleared!");
-					textareaRef.current?.focus();
-				}}>
-					<span>Clear Query</span>
-				</button>
-				<button 
-					type="button" 
-					className={`${styles.button} ${styles.copyButton}`} 
-					onClick={() => {
-						navigator.clipboard.writeText(query);
-						toast("Query copied to clipboard");
-					}}
-					title="Copy to clipboard"
-				>
-					<Copy className={styles.copyIcon} />
-				</button>
+				<div className={styles.rectangularButtons}>
+					<button
+						type="button"
+						className={styles.button}
+						onClick={() => toast("Query executed!")}
+					>
+						Execute Query
+					</button>
+					<button
+						type="button"
+						className={styles.button}
+						onClick={() => {
+							setQuery("");
+							toast("Query cleared!");
+							textareaRef.current?.focus();
+						}}
+					>
+						<span>Clear Query</span>
+					</button>
+				</div>
+				<div className={styles.roundedButtons}>
+					<button
+						type="button"
+						className={`${styles.button} ${styles.copyButton}`}
+						onClick={() => {
+							navigator.clipboard.writeText(query);
+							toast("Query copied to clipboard!");
+						}}
+						title="Copy to clipboard"
+					>
+						<Copy className={styles.copyIcon} />
+					</button>
+					<button
+						type="button"
+						className={`${styles.button} ${styles.copyButton}`}
+						onClick={() => {
+							navigator.clipboard.writeText(query);
+							toast("Query pinned!");
+						}}
+						title="Pin Query"
+					>
+						<Pin className={styles.copyIcon} />
+					</button>
+				</div>
 			</div>
 		</div>
 	);

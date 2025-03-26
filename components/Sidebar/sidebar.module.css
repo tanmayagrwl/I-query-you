@@ -63,14 +63,3 @@
 	padding: 1rem;
 	background-color: #1e1e1e;
   }
-  .container {
-	display: flex;
-	flex-direction: row;
-	height: 100vh;
-	position: relative;
-  }
-
-  .contentContainer {
-	flex: 1;
-	overflow-y: auto;
-  }

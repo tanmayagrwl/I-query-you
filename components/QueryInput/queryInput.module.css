@@ -59,46 +59,78 @@
 }
 
 .button:hover {
-  background-color: #e8e8e8;
-  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+	background-color: #e8e8e8;
+	box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
 }
 
 .button:active {
-  background-color: #d0d0d0;
-  transform: translateY(1px);
-  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+	background-color: #d0d0d0;
+	transform: translateY(1px);
+	box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
 }
 
 .buttonContainer {
 	margin-left: 10%;
 	margin-top: 20px;
 	display: flex;
-  gap: 15px;
+	gap: 15px;
 }
 
-
 .copyButton {
-  border-radius: 50%;
-  width: 36px;
-  height: 36px;
-  padding: 10px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  background-color: #2f2f2f;
-  color: #e0e0e0;
-  border: none;
-  transition: all 0.2s ease;
-  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+	border-radius: 50%;
+	width: 36px;
+	height: 36px;
+	padding: 10px;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	background-color: #2f2f2f;
+	color: #e0e0e0;
+	border: none;
+	transition: all 0.2s ease;
+	box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
 }
 
 .copyButton:hover {
-  background-color: #3a3a3a;
-  transform: translateY(-2px);
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+	background-color: #3a3a3a;
+	transform: translateY(-2px);
+	box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
 }
 
 .copyButton:active {
-  transform: translateY(0);
-  box-shadow: 0 2px 3px rgba(0, 0, 0, 0.2);
+	transform: translateY(0);
+	box-shadow: 0 2px 3px rgba(0, 0, 0, 0.2);
+}
+
+.buttonContainer {
+	margin-left: 10%;
+	margin-top: 20px;
+	display: flex;
+	flex-wrap: wrap;
+	gap: 15px;
+}
+
+.rectangularButtons {
+	display: flex;
+	gap: 15px;
+}
+
+.roundedButtons {
+	display: flex;
+	gap: 15px;
+}
+
+@media (max-width: 768px) {
+	.buttonContainer {
+		flex-direction: column;
+		align-items: flex-start;
+	}
+
+	.rectangularButtons {
+		width: 100%;
+	}
+
+	.roundedButtons {
+		margin-top: 15px;
+	}
 }
