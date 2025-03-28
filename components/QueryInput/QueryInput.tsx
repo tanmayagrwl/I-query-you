@@ -13,7 +13,7 @@ hljs.registerLanguage("sql", sql)
 
 function QueryInput() {
   const { addQuery } = useStore()
-  const [pinned, setPinned] = useState<boolean>(true)
+  const [pinned, setPinned] = useState<boolean>(false)
   const [query, setQuery] = useState<string>("")
   const textareaRef = useRef<HTMLTextAreaElement>(null)
   const highlightedDivRef = useRef<HTMLDivElement>(null)
@@ -108,17 +108,18 @@ function QueryInput() {
               navigator.clipboard.writeText(query)
               console.log(pinned)
               if (pinned) {
-                toast("Query pinned!")
-              } else {
                 toast("Query unpinned!")
+              } else {
+                toast("Query pinned!")
+
               }
             }}
             title="Pin Query"
           >
             {pinned ? (
-              <Pin className={styles.unpinIcon} />
-            ) : (
               <PinOff className={styles.pinIcon} />
+            ) : (
+              <Pin className={styles.unpinIcon} />
             )}
           </button>
         </div>

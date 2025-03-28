@@ -10,11 +10,11 @@ interface SidebarProps {
 }
 
 function Sidebar({ sidebar, setSidebar }: SidebarProps) {
-        const { TogglePinQuery } = useStore()
-    
-  const { queries } = useStore()
-queries.sort((a, b) => (a.pinned === b.pinned ? 0 : a.pinned ? 1 : -1))
+  const { TogglePinQuery } = useStore()
 
+  const { queries } = useStore()
+  queries.sort((a, b) => (a.pinned === b.pinned ? 0 : a.pinned ? -1 : 1))
+  console.log(queries)
   return (
     <div className={`${styles.queryHistory} ${sidebar ? styles.enabled : ""}`}>
       <div className={styles.header}>
@@ -36,22 +36,25 @@ queries.sort((a, b) => (a.pinned === b.pinned ? 0 : a.pinned ? 1 : -1))
               >
                 <Copy className={styles.copyIcon} />
               </button>
-              <button className={styles.sidebarActionButton} type="button"
-              onClick={() => { 
-                TogglePinQuery(query.id)
-                if(!query.pinned){
+              <button
+                className={styles.sidebarActionButton}
+                type="button"
+                onClick={() => {
+                  TogglePinQuery(query.id)
+                  if (!query.pinned) {
                     console.log(query.pinned)
-                toast("Query Pinned!")
-                } else {
+                    toast("Query Pinned!")
+                  } else {
                     console.log(query.pinned)
 
                     toast("Query Unpinned!")
-              }}}>
+                  }
+                }}
+              >
                 {query.pinned ? (
-                  <Pin className={styles.unpinIcon} />
-                ) : (
                   <PinOff className={styles.pinIcon} />
-
+                ) : (
+                  <Pin className={styles.unpinIcon} />
                 )}
               </button>
             </div>
