@@ -14,7 +14,6 @@ function Sidebar({ sidebar, setSidebar }: SidebarProps) {
 
   const { queries } = useStore()
   queries.sort((a, b) => (a.pinned === b.pinned ? 0 : a.pinned ? -1 : 1))
-  console.log(queries)
   return (
     <div className={`${styles.queryHistory} ${sidebar ? styles.enabled : ""}`}>
       <div className={styles.header}>
@@ -31,7 +30,7 @@ function Sidebar({ sidebar, setSidebar }: SidebarProps) {
                 className={styles.sidebarActionButton}
                 onClick={() => {
                   navigator.clipboard.writeText(query.query)
-                  toast("Query Copied!")
+                  toast.success("Query Copied!")
                 }}
               >
                 <Copy className={styles.copyIcon} />
@@ -42,12 +41,9 @@ function Sidebar({ sidebar, setSidebar }: SidebarProps) {
                 onClick={() => {
                   TogglePinQuery(query.id)
                   if (!query.pinned) {
-                    console.log(query.pinned)
-                    toast("Query Pinned!")
+                    toast.success("Query Pinned!")
                   } else {
-                    console.log(query.pinned)
-
-                    toast("Query Unpinned!")
+                    toast.success("Query Unpinned!")
                   }
                 }}
               >

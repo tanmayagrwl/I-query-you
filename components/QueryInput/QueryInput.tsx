@@ -65,13 +65,17 @@ function QueryInput() {
             type="button"
             className={styles.button}
             onClick={() => {
+              if (!query) {
+                toast.error("Query is empty!")
+                return
+              }
               addQuery({
                 id: crypto.randomUUID(),
                 query,
                 pinned: pinned,
                 table: "users",
               })
-              toast("Query executed!")
+              toast.success("Query executed!")
             }}
           >
             Execute Query
@@ -94,7 +98,7 @@ function QueryInput() {
             className={`${styles.button} ${styles.copyButton}`}
             onClick={() => {
               navigator.clipboard.writeText(query)
-              toast("Query copied to clipboard!")
+              toast.success("Query copied to clipboard!")
             }}
             title="Copy to clipboard"
           >
@@ -108,9 +112,9 @@ function QueryInput() {
               navigator.clipboard.writeText(query)
               console.log(pinned)
               if (pinned) {
-                toast("Query unpinned!")
+                toast.success("Query unpinned!")
               } else {
-                toast("Query pinned!")
+                toast.success("Query pinned!")
 
               }
             }}
