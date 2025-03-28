@@ -1,7 +1,7 @@
 .queryHistory {
 	width: 25%;
     border-right: 1px solid #2F2F2F;
-    background-color: #121212;
+    background-color: #0C0C0C;
 }
 
 .sidebarIcon {
@@ -45,6 +45,8 @@
 	display: flex;
 	align-items: center;
 	gap: 1rem;
+	flex-shrink: 0;
+
   }
   
   .queryHeader {
@@ -68,9 +70,11 @@
 	flex-direction: row;
 	height: 100vh;
 	position: relative;
+	overflow: hidden;
   }
 
   .contentContainer {
 	flex: 1;
 	overflow-y: auto;
   }
+
