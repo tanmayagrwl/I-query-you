@@ -66,7 +66,7 @@ function QueryInput() {
             className={styles.button}
             onClick={() => {
               if (!query) {
-                toast.error("Query is empty!")
+                toast.error("Enter a query first!")
                 return
               }
               addQuery({
