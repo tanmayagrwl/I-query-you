@@ -6,13 +6,13 @@ import "highlight.js/styles/github-dark.css"
 import React from "react"
 import { toast } from "sonner"
 import styles from "./queryInput.module.css"
-import { Copy, Pin, PinOff } from "lucide-react"
+import { Copy } from "lucide-react"
 import { useStore } from "@/store/useStore"
 
 hljs.registerLanguage("sql", sql)
 
 function QueryInput() {
-  const { addQuery } = useStore()
+  const { addQuery, activeQuery } = useStore()
   const [pinned, setPinned] = useState<boolean>(false)
   const [query, setQuery] = useState<string>("")
   const textareaRef = useRef<HTMLTextAreaElement>(null)
@@ -37,6 +37,16 @@ function QueryInput() {
       textarea?.removeEventListener("scroll", handleScroll)
     }
   }, [])
+
+  useEffect(() => {
+    if (activeQuery) {
+      setQuery(activeQuery.query)
+      setPinned(activeQuery.pinned)
+    } else {
+      setQuery("")
+      setPinned(false)
+    }
+  }, [activeQuery])
 
   return (
     <div>
@@ -91,8 +101,6 @@ function QueryInput() {
           >
             <span>Clear Query</span>
           </button>
-        </div>
-        <div className={styles.roundedButtons}>
           <button
             type="button"
             className={`${styles.button} ${styles.copyButton}`}
@@ -104,7 +112,9 @@ function QueryInput() {
           >
             <Copy className={styles.copyIcon} />
           </button>
-          <button
+        </div>
+          
+          {/* <button
             type="button"
             className={`${styles.button} ${styles.copyButton}`}
             onClick={() => {
@@ -125,10 +135,10 @@ function QueryInput() {
             ) : (
               <Pin className={styles.unpinIcon} />
             )}
-          </button>
+          </button> */}
         </div>
       </div>
-    </div>
+
   )
 }
 

@@ -9,12 +9,15 @@ interface Query {
 
 export const useStore = create<{
     queries: Query[];
+    activeQuery: Query | null;
+    setActiveQuery: (query: Query | null) => void;
     addQuery: (query: Query) => void;
     removeQuery: (id: string) => void;
     TogglePinQuery: (id: string) => void;
 }>((set) => ({
     queries: [],
-    
+    activeQuery: null,
+    setActiveQuery: (query: Query | null) => set({ activeQuery: query }),
     addQuery: (query: Query) => set((state) => ({
         queries: [...state.queries, query]
     })),

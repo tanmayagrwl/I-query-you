@@ -1,6 +1,6 @@
 import React from "react"
 import styles from "./sidebar.module.css"
-import { Copy, Pin, PinOff, SidebarClose } from "lucide-react"
+import { Copy, Pin, PinOff, SidebarClose, Trash } from "lucide-react"
 import { useStore } from "@/store/useStore"
 import { toast } from "sonner"
 
@@ -10,7 +10,8 @@ interface SidebarProps {
 }
 
 function Sidebar({ sidebar, setSidebar }: SidebarProps) {
-  const { TogglePinQuery } = useStore()
+  const { TogglePinQuery, setActiveQuery, removeQuery, activeQuery } =
+    useStore()
 
   const { queries } = useStore()
   queries.sort((a, b) => (a.pinned === b.pinned ? 0 : a.pinned ? -1 : 1))
@@ -22,13 +23,37 @@ function Sidebar({ sidebar, setSidebar }: SidebarProps) {
       </div>
       <div className={styles.queryList}>
         {queries.map((query) => (
-          <div key={query.id} className={styles.queryHeader}>
+          <button
+            key={query.id}
+            className={`${styles.queryHeader} ${
+              activeQuery?.id === query.id ? styles.activeQuery : ""
+            }`}
+            onClick={() => {
+              if (activeQuery?.id !== query.id) {
+                setActiveQuery(query)
+              } else {
+                setActiveQuery(null)
+              }
+            }}
+          >
             <p className={styles.queryText}>{query.query}</p>
             <div className={styles.queryActions}>
               <button
                 type="button"
                 className={styles.sidebarActionButton}
-                onClick={() => {
+                onClick={(e) => {
+                  e.stopPropagation()
+                  removeQuery(query.id)
+                  toast.success("Query Deleted!")
+                }}
+              >
+                <Trash className={styles.copyIcon} />
+              </button>
+              <button
+                type="button"
+                className={styles.sidebarActionButton}
+                onClick={(e) => {
+                  e.stopPropagation()
                   navigator.clipboard.writeText(query.query)
                   toast.success("Query Copied!")
                 }}
@@ -38,7 +63,8 @@ function Sidebar({ sidebar, setSidebar }: SidebarProps) {
               <button
                 className={styles.sidebarActionButton}
                 type="button"
-                onClick={() => {
+                onClick={(e) => {
+                  e.stopPropagation()
                   TogglePinQuery(query.id)
                   if (!query.pinned) {
                     toast.success("Query Pinned!")
@@ -54,7 +80,7 @@ function Sidebar({ sidebar, setSidebar }: SidebarProps) {
                 )}
               </button>
             </div>
-          </div>
+          </button>
         ))}
       </div>
     </div>
