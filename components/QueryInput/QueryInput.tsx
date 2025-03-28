@@ -85,8 +85,8 @@ function QueryInput() {
             className={styles.button}
             onClick={() => {
               setQuery("")
-              toast("Query cleared!")
               textareaRef.current?.focus()
+              toast.success("Query cleared!")
             }}
           >
             <span>Clear Query</span>
