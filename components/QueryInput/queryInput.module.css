@@ -167,4 +167,7 @@
 	border-color: #4a4a4a;
 	box-shadow: 0 0 0 2px rgba(255, 255, 255, 0.1);
 }
-
+  
+  .hiddenFileInput {
+	display: none;
+  }
