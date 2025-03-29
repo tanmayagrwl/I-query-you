@@ -3,6 +3,7 @@ import styles from "./page.module.css";
 import Header from "@/components/Header/Header";
 import QueryInput from "@/components/QueryInput/QueryInput";
 import Sidebar from "@/components/Sidebar/Sidebar";
+import Table from "@/components/Table/Table";
 import { SidebarOpen } from "lucide-react";
 import { useState } from "react";
 
@@ -20,6 +21,7 @@ export default function Home() {
 			<div className={styles.contentContainer}>
 				<Header />
 				<QueryInput />
+                <Table />
 			</div>
 		</div>
 	);
