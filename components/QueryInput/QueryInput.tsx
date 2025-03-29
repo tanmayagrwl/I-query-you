@@ -69,6 +69,14 @@ function QueryInput() {
           spellCheck="false"
         />
       </div>
+      <select name="cars" id="cars" className={styles.select} defaultValue="Select a Table">
+      <option value="Choose a Table" className={styles.option}>Choose a Table</option>
+        <option value="volvo" className={styles.option}>Volvo</option>
+        <option value="saab">Saab</option>
+        <option value="mercedes">Mercedes</option>
+        <option value="audi">Audi</option>
+      </select>
+      
       <div className={styles.buttonContainer}>
         <div className={styles.rectangularButtons}>
           <button
@@ -113,8 +121,8 @@ function QueryInput() {
             <Copy className={styles.copyIcon} />
           </button>
         </div>
-          
-          {/* <button
+
+        {/* <button
             type="button"
             className={`${styles.button} ${styles.copyButton}`}
             onClick={() => {
@@ -136,9 +144,8 @@ function QueryInput() {
               <Pin className={styles.unpinIcon} />
             )}
           </button> */}
-        </div>
       </div>
-
+    </div>
   )
 }
 

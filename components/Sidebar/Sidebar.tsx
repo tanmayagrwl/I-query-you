@@ -23,7 +23,7 @@ function Sidebar({ sidebar, setSidebar }: SidebarProps) {
       </div>
       <div className={styles.queryList}>
         {queries.map((query) => (
-          <button
+          <div
             key={query.id}
             className={`${styles.queryHeader} ${
               activeQuery?.id === query.id ? styles.activeQuery : ""
@@ -80,7 +80,7 @@ function Sidebar({ sidebar, setSidebar }: SidebarProps) {
                 )}
               </button>
             </div>
-          </button>
+          </div>
         ))}
       </div>
     </div>
