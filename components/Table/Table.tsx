@@ -63,27 +63,27 @@ function Table() {
 
   return (
     <div>
-      <div className={styles.searchSection}>
-        <div className={styles.searchInputContainer}>
-          <Search />
-          <input
-            type="text"
-            className={styles.searchInput}
-            placeholder="Search within table..."
-            value={searchTerm}
-            onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
-              setSearchTerm(e.target.value)
-              setCurrentPage(1)
-            }}
-          />
-          <X onClick={() => setSearchTerm("")} />
-        </div>
-      </div>
-
       <div className={styles.csvJsonSection}>
+       
         {selectedTable && tables[selectedTable] && (
           <>
             <div className={styles.csvTableWrapper}>
+            <div className={styles.searchSection}>
+          <div className={styles.searchInputContainer}>
+            <Search />
+            <input
+              type="text"
+              className={styles.searchInput}
+              placeholder="Search within table..."
+              value={searchTerm}
+              onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
+                setSearchTerm(e.target.value)
+                setCurrentPage(1)
+              }}
+            />
+            <X onClick={() => setSearchTerm("")} />
+          </div>
+        </div>
               <div className={styles.csvTableContainer}>
                 <table className={styles.csvTable}>
                   <thead>

@@ -116,9 +116,12 @@
 	gap: 15px;
 }
 
-.roundedButtons {
-	display: flex;
-	gap: 15px;
+.roundedButton {
+	position: absolute;
+	bottom: 20px;
+	right: 20px;
+	z-index: 20;
+	
 }
 
 @media (max-width: 768px) {

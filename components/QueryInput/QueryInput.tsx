@@ -98,6 +98,17 @@ function QueryInput() {
   return (
     <div>
       <div className={styles.editorContainer}>
+      <button
+            type="button"
+            className={`${styles.button} ${styles.copyButton} ${styles.roundedButton}`}
+            onClick={() => {
+              navigator.clipboard.writeText(query)
+              toast.success("Query copied to clipboard!")
+            }}
+            title="Copy to clipboard"
+          >
+            <Copy className={styles.copyIcon} />
+          </button>
         <div
           ref={highlightedDivRef}
           className={styles.highlightedQuery}
@@ -169,17 +180,7 @@ function QueryInput() {
           >
             <span>Format Query</span>
           </button>
-          <button
-            type="button"
-            className={`${styles.button} ${styles.copyButton}`}
-            onClick={() => {
-              navigator.clipboard.writeText(query)
-              toast.success("Query copied to clipboard!")
-            }}
-            title="Copy to clipboard"
-          >
-            <Copy className={styles.copyIcon} />
-          </button>
+        
         </div>
       </div>
       {/* CSV Upload and Conversion Section */}
