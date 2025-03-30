@@ -46,16 +46,7 @@
 	border-bottom: 1px solid #2f2f2f;
   }
   
-  .jsonPreview {
-	background-color: #121212;
-	border: 1px solid #2f2f2f;
-	border-radius: 10px;
-	padding: 15px;
-	overflow: auto;
-	max-height: 400px;
-	margin: 0;
-	color: white;
-  }
+
   
   .hiddenFileInput {
 	display: none;
@@ -138,20 +129,15 @@
 	padding: 0 0.75rem;
 	width: 300px;
 	transition: all 0.2s ease;
-	margin-left: auto; /* Aligns to the right */
+	margin-left: auto;
 }
 
-.searchWrapper:focus-within {
-	border-color: #60a5fa;
-	box-shadow: 0 0 0 2px rgba(96, 165, 250, 0.2);
-}
 
 .searchInput {
 	background-color: transparent;
 	border: none;
 	color: white;
 	font-size: 0.875rem;
-	padding: 0.75rem 0.5rem;
 	width: 100%;
 	outline: none;
 }
