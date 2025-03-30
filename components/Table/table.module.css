@@ -1,7 +1,4 @@
 
-/* Existing styles remain the same */
-/* Add these new styles at the bottom */
-
 .csvJsonSection {
 	display: flex;
 	gap: 20px;
@@ -21,7 +18,9 @@
 	background-color: #121212;
 	border: 1px solid #2f2f2f;
 	border-radius: 10px;
-	padding: 15px;
+	padding-left: 15px;
+	padding-right: 15px;
+	padding-bottom: 15px;
 	overflow: auto;
 	max-height: 400px;
   }
@@ -62,15 +61,17 @@
 	display: none;
   }
 
-  /* Add these new styles */
+
 .csvTableWrapper {
 	background-color: #121212;
 	border: 1px solid #2f2f2f;
 	border-radius: 10px;
 	padding: 15px;
 	overflow: auto;
+	overflow-y: hidden;
 	max-height: 400px;
 	width: 100%;
+
   }
   
   .csvTableContainer {
@@ -83,6 +84,7 @@
 	border-collapse: collapse;
 	color: white;
 	table-layout: auto;
+
   }
   
   .csvTable th,
@@ -103,4 +105,7 @@
 	/* Keep existing styles */
 	white-space: pre-wrap;
 	word-break: break-word;
+  }
+  .csvTable tr:hover td {
+	background-color: #2a2a2a;
   }
