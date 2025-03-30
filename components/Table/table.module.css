@@ -273,5 +273,5 @@
 	display: flex;
 	align-items: center;
 	justify-content: center;
-	gap: 5;
+	gap: 0.5rem;
 }
