@@ -6,7 +6,7 @@ I Query You is a web-based, UI-focused query execution application designed to s
 ## Key Features
 - **Query Writing & Execution**
     - Syntax highlighting for SQL keywords
-    - Automatic query formatting
+    - Query formatting
     - Query history management
 
 - **Data Management**
