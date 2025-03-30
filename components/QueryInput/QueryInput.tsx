@@ -9,6 +9,7 @@ import styles from "./queryInput.module.css"
 import { Copy } from "lucide-react"
 import { useStore } from "@/store/useStore"
 import Papa from "papaparse"
+import { format } from "sql-formatter"
 
 hljs.registerLanguage("sql", sql)
 
@@ -28,7 +29,23 @@ function QueryInput() {
   const highlightQuery = (text: string) => {
     return hljs.highlight(text, { language: "sql" }).value
   }
-
+  const formatQuery = () => {
+     if (!query.trim()) {
+      toast.error("Enter a query first!")
+      return
+    }
+    try {
+      const formatted = format(query, {
+        language: "mysql",
+        keywordCase: "upper" 
+      })
+      setQuery(formatted)
+      toast.success("Query formatted successfully!")
+    } catch (error) {
+      toast.error("Error formatting query")
+      console.warn("Could not format SQL:", error)
+    }
+  }
   const handleFileUpload = (event: React.ChangeEvent<HTMLInputElement>) => {
     const file = event.target.files?.[0]
     if (!file) return
@@ -93,7 +110,6 @@ function QueryInput() {
           placeholder="Enter your query here"
           value={query}
           onChange={(e) => setQuery(e.target.value)}
-          spellCheck="false"
         />
       </div>
       <select
@@ -145,6 +161,13 @@ function QueryInput() {
             }}
           >
             <span>Clear Query</span>
+          </button>
+          <button
+            type="button"
+            className={styles.button}
+            onClick={formatQuery}
+          >
+            <span>Format Query</span>
           </button>
           <button
             type="button"

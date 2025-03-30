@@ -16,6 +16,7 @@
     "react": "^19.0.0",
     "react-dom": "^19.0.0",
     "sonner": "^2.0.1",
+    "sql-formatter": "^15.5.2",
     "zustand": "^5.0.3"
   },
   "devDependencies": {
