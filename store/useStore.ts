@@ -23,7 +23,42 @@ export const useStore = create<{
   setSelectedTable: (tableName: string) => void
 }>((set) => ({
   queries: [],
-  tables: {},
+  tables: {
+    employees: [
+      {
+        id: 1,
+        name: "John Doe",
+        age: 30,
+        department: "HR",
+      },
+      {
+        id: 2,
+        name: "Jane Smith",
+        age: 25,
+        department: "Finance",
+      },
+      {
+        id: 3,
+        name: "Alice Johnson",
+        age: 28,
+        department: "Engineering",
+      },
+    ],
+    departments: [
+      {
+        id: 1,
+        name: "HR",
+      },
+      {
+        id: 2,
+        name: "Finance",
+      },
+      {
+        id: 3,
+        name: "Engineering",
+      },
+    ],
+  },
   addTable: (tableName: string, data: unknown[]) =>
     set((state) => ({
       tables: {

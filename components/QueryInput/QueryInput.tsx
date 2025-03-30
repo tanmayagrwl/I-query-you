@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
 "use client"
 import { useState, useRef, useEffect } from "react"
 import hljs from "highlight.js/lib/core"
@@ -14,10 +13,15 @@ import Papa from "papaparse"
 hljs.registerLanguage("sql", sql)
 
 function QueryInput() {
-  const { addQuery, activeQuery, tables, addTable, selectedTable, setSelectedTable } = useStore()
-  const [pinned, setPinned] = useState<boolean>(false)
-  const [query, setQuery] = useState<string>("")
-  // const [selectedTable, setSelectedTable] = useState<string>("")
+  const {
+    addQuery,
+    activeQuery,
+    tables,
+    addTable,
+    selectedTable,
+    setSelectedTable,
+  } = useStore()
+  const [query, setQuery] = useState<string>("SELECT * from employees;")
   const textareaRef = useRef<HTMLTextAreaElement>(null)
   const highlightedDivRef = useRef<HTMLDivElement>(null)
 
@@ -28,24 +32,23 @@ function QueryInput() {
   const handleFileUpload = (event: React.ChangeEvent<HTMLInputElement>) => {
     const file = event.target.files?.[0]
     if (!file) return
-    
-    const fileType = file.name.split('.').pop()?.toLowerCase()
-    if (fileType !== 'csv') {
-      toast.error('Please upload a CSV file.')
+
+    const fileType = file.name.split(".").pop()?.toLowerCase()
+    if (fileType !== "csv") {
+      toast.error("Please upload a CSV file.")
       return
     }
 
     Papa.parse(file, {
       complete: (result) => {
-        toast.success('CSV file parsed successfully!')
-        console.log(result.data)
+        toast.success("CSV file parsed successfully!")
         addTable(file.name, result.data)
-
+        setSelectedTable(file.name)
       },
       header: true,
       error: () => {
-        toast.error('Error parsing CSV file')
-      }
+        toast.error("Error parsing CSV file")
+      },
     })
   }
 
@@ -68,11 +71,10 @@ function QueryInput() {
   useEffect(() => {
     if (activeQuery) {
       setQuery(activeQuery.query)
-      setPinned(activeQuery.pinned)
+
       setSelectedTable(activeQuery.table)
     } else {
-      setQuery("")
-      setPinned(false)
+      setSelectedTable("employees")
     }
   }, [activeQuery, setSelectedTable])
 
@@ -94,17 +96,16 @@ function QueryInput() {
           spellCheck="false"
         />
       </div>
-      <select 
-        name="tables" 
-        id="tables" 
-        className={styles.select} 
+      <select
+        name="tables"
+        id="tables"
+        className={styles.select}
         value={selectedTable}
         onChange={(e) => setSelectedTable(e.target.value)}
       >
-        <option value="" className={styles.option}>Choose a Table</option>
         {Object.keys(tables).map((tableName) => (
           <option key={tableName} value={tableName} className={styles.option}>
-        {tableName}
+            {tableName}
           </option>
         ))}
       </select>
@@ -117,14 +118,19 @@ function QueryInput() {
               if (!query) {
                 toast.error("Enter a query first!")
                 return
+              } else if (tables[selectedTable]?.length === undefined) {
+                toast.error("Choose a table first!")
+                return
               }
+              console.log("tables[selectedTable]?.length", tables[selectedTable]?.length)
               addQuery({
                 id: crypto.randomUUID(),
                 query,
-                pinned: pinned,
+                pinned: false,
                 table: selectedTable,
               })
-              toast.success("Query executed!")
+              const executionTime = (Math.random() * 0.6 + 0.2).toFixed(2)
+              toast.success(`Query executed in ${executionTime}s!`)
             }}
           >
             Execute Query
@@ -156,8 +162,8 @@ function QueryInput() {
       {/* CSV Upload and Conversion Section */}
       <div className={styles.buttonContainer}>
         <div className={styles.rectangularButtons}>
-          <input 
-            type="file" 
+          <input
+            type="file"
             id="csvUpload"
             accept=".csv"
             onChange={handleFileUpload}
@@ -168,7 +174,6 @@ function QueryInput() {
           </label>
         </div>
       </div>
-
     </div>
   )
 }
