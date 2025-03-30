@@ -4,6 +4,7 @@ import { useStore } from "@/store/useStore"
 import { Search, X } from "lucide-react"
 import UploadCsvButton from "./UploadCsvButton"
 import Pagination from "./Pagination"
+import DownloadCsvButton from "./DownloadCsvButton"
 
 function Table() {
   const { tables, selectedTable } = useStore()
@@ -52,7 +53,12 @@ function Table() {
             <div className={styles.csvTableWrapper}>
               <div className={styles.searchSection}>
                 <UploadCsvButton />
-
+                <DownloadCsvButton
+                  selectedTable={selectedTable}
+                  tables={tables}
+                  filteredRows={filteredRows}
+                  searchTerm={searchTerm}
+                />
                 <div className={styles.searchInputContainer}>
                   <Search />
                   <input
