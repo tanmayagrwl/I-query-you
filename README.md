@@ -1,36 +1,71 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# iQueryYou
+
+## Overview
+I Query You is a web-based, UI-focused query execution application designed to simplify database interactions. The application provides an intuitive interface for writing, executing, and managing SQL queries with powerful data visualization capabilities.
+
+## Key Features
+- **Query Writing & Execution**
+    - Syntax highlighting for SQL keywords
+    - Automatic query formatting
+    - Query history management
+
+- **Data Management**
+    - Save and retrieve queries
+    - Import new CSV data sources
+    - Export query results as CSV
+
+- **Visualization & Analysis**
+    - Interactive table visualization
+    - Efficient pagination for large datasets
+    - Advanced table search and filtering
+
+## Tech Stack
+- **Framework**: Next.js with TypeScript
+- **Package Manager**: pnpm
+- **Key Packages**:
+    - **Frontend**:
+        - Zustand for global state management
+
+    - **Data & Formatting**:
+        - SQL-formatter for query formatting
+        - Highlight.js for SQL syntax highlighting
+        - Papaparse for CSV parsing
+
+    - **User Experience**:
+        - Sonner for toast notifications
+
+## Performance Metrics
+The application has been tested across multiple geographic locations using Lighthouse in Chrome DevTools:
+
+| Location | Performance Score | FCP | SI | LCP | TBT | CLS | Page Size |
+|----------|------------------|-----|-----|-----|-----|-----|----------|
+| London | 100 | 0.2 s | 0.2 s | 0.5 s | 10 ms | 0.014 | 524 KB |
+| San Francisco | 100 | 0.2 s | 0.2 s | 0.5 s | 20 ms | 0.014 | 524 KB |
+| Mumbai | 100 | 0.3 s | 0.3 s | 0.6 s | 70 ms | 0.014 | 524 KB |
+
+*FCP: First Contentful Paint, SI: Speed Index, LCP: Largest Contentful Paint, TBT: Total Blocking Time, CLS: Cumulative Layout Shift*
+
+This test has been performed on www.dotcom-tools.com and here's the [test result link](https://www.dotcom-tools.com/website-speed-test?type=summary-report&id=fd01a6eaef9a4680a7056fad18fcca38&share=1)
+
+## Performance Optimizations
+- Implemented code splitting using Next.js dynamic imports.
+- Used pagination for query results to minimize DOM size.
+- Used global state management to avoid unnecessary drilling.
 
 ## Getting Started
-
-First, run the development server:
-
 ```bash
-npm run dev
-# or
-yarn dev
-# or
+# Clone the repository
+git clone https://github.com/tanmayagrwl/I-query-you.git
+
+# Navigate to project directory
+cd I-query-you
+
+# Install dependencies
+pnpm install
+
+# Start the development server
 pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
-
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
-
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
-
-## Learn More
-
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+## License
+[MIT](LICENSE)
