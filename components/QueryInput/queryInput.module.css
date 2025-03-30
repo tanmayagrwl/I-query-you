@@ -1,14 +1,40 @@
 .editorContainer {
 	position: relative;
 	background-color: #121212;
-	height: 200px;
-	width: 100%;
-	max-width: 80%;
+
 	margin: auto;
 	margin-top: 20px;
 	border: 1px solid #2f2f2f;
 	border-radius: 10px;
 	overflow: hidden;
+}
+
+.editorContainerHeight {
+	height: 200px;
+	width: 100%;
+	max-width: 80%;
+}
+
+.textinputHeight{
+	height: 40px;
+	width: 100%;
+	max-width: 25%;
+	margin-left: 10%;
+	padding: 10px;
+}
+
+@media screen and (max-width: 768px) {
+	.textinputHeight {
+		height: 40px;
+		width: 100%;
+		max-width: 80%;
+	}
+	
+}
+
+.textinputHeight:active,
+.textinputHeight:focus {
+	outline: none;
 }
 
 .highlightedQuery,

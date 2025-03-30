@@ -36,7 +36,7 @@ function Sidebar({ sidebar, setSidebar }: SidebarProps) {
               }
             }}
           >
-            <p className={styles.queryText}>{query.query}</p>
+            <p className={styles.queryText}>{query.name !== "" ? query.name : query.query}</p>
             <div className={styles.queryActions}>
               <button
                 type="button"

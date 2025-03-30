@@ -2,6 +2,7 @@ import { create } from "zustand"
 
 interface Query {
   id: string
+  name: string
   query: string
   pinned: boolean
   table: string

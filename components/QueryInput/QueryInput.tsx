@@ -13,14 +13,10 @@ import { format } from "sql-formatter"
 hljs.registerLanguage("sql", sql)
 
 function QueryInput() {
-  const {
-    addQuery,
-    activeQuery,
-    tables,
-    selectedTable,
-    setSelectedTable,
-  } = useStore()
+  const { addQuery, activeQuery, tables, selectedTable, setSelectedTable } =
+    useStore()
   const [query, setQuery] = useState<string>("SELECT * from employees;")
+  const [name, setName] = useState<string>("")
   const textareaRef = useRef<HTMLTextAreaElement>(null)
   const highlightedDivRef = useRef<HTMLDivElement>(null)
 
@@ -28,14 +24,14 @@ function QueryInput() {
     return hljs.highlight(text, { language: "sql" }).value
   }
   const formatQuery = () => {
-     if (!query.trim()) {
+    if (!query.trim()) {
       toast.error("Enter a query first!")
       return
     }
     try {
       const formatted = format(query, {
         language: "mysql",
-        keywordCase: "upper" 
+        keywordCase: "upper",
       })
       setQuery(formatted)
       toast.success("Query formatted successfully!")
@@ -63,7 +59,7 @@ function QueryInput() {
   useEffect(() => {
     if (activeQuery) {
       setQuery(activeQuery.query)
-
+      setName(activeQuery.name)
       setSelectedTable(activeQuery.table)
     } else {
       setSelectedTable("employees")
@@ -72,18 +68,27 @@ function QueryInput() {
 
   return (
     <div>
-      <div className={styles.editorContainer}>
-      <button
-            type="button"
-            className={`${styles.button} ${styles.copyButton} ${styles.roundedButton}`}
-            onClick={() => {
-              navigator.clipboard.writeText(query)
-              toast.success("Query copied to clipboard!")
-            }}
-            title="Copy to clipboard"
-          >
-            <Copy className={styles.copyIcon} />
-          </button>
+      <input
+        type="text"
+        value={name}
+        onChange={(e) => setName(e.target.value)}
+        placeholder="Enter your query name (optional)"
+        className={`${styles.editorContainer} ${styles.textinputHeight} `}
+      />
+      <div
+        className={`${styles.editorContainer} ${styles.editorContainerHeight}`}
+      >
+        <button
+          type="button"
+          className={`${styles.button} ${styles.copyButton} ${styles.roundedButton}`}
+          onClick={() => {
+            navigator.clipboard.writeText(query)
+            toast.success("Query copied to clipboard!")
+          }}
+          title="Copy to clipboard"
+        >
+          <Copy className={styles.copyIcon} />
+        </button>
         <div
           ref={highlightedDivRef}
           className={styles.highlightedQuery}
@@ -124,9 +129,13 @@ function QueryInput() {
                 toast.error("Choose a table first!")
                 return
               }
-              console.log("tables[selectedTable]?.length", tables[selectedTable]?.length)
+              console.log(
+                "tables[selectedTable]?.length",
+                tables[selectedTable]?.length
+              )
               addQuery({
                 id: crypto.randomUUID(),
+                name: name,
                 query,
                 pinned: false,
                 table: selectedTable,
@@ -148,14 +157,9 @@ function QueryInput() {
           >
             <span>Clear Query</span>
           </button>
-          <button
-            type="button"
-            className={styles.button}
-            onClick={formatQuery}
-          >
+          <button type="button" className={styles.button} onClick={formatQuery}>
             <span>Format Query</span>
           </button>
-        
         </div>
       </div>
     </div>
