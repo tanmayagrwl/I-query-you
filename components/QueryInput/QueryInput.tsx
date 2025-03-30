@@ -8,7 +8,6 @@ import { toast } from "sonner"
 import styles from "./queryInput.module.css"
 import { Copy } from "lucide-react"
 import { useStore } from "@/store/useStore"
-import Papa from "papaparse"
 import { format } from "sql-formatter"
 
 hljs.registerLanguage("sql", sql)
@@ -18,7 +17,6 @@ function QueryInput() {
     addQuery,
     activeQuery,
     tables,
-    addTable,
     selectedTable,
     setSelectedTable,
   } = useStore()
@@ -46,29 +44,6 @@ function QueryInput() {
       console.warn("Could not format SQL:", error)
     }
   }
-  const handleFileUpload = (event: React.ChangeEvent<HTMLInputElement>) => {
-    const file = event.target.files?.[0]
-    if (!file) return
-
-    const fileType = file.name.split(".").pop()?.toLowerCase()
-    if (fileType !== "csv") {
-      toast.error("Please upload a CSV file.")
-      return
-    }
-
-    Papa.parse(file, {
-      complete: (result) => {
-        toast.success("CSV file parsed successfully!")
-        addTable(file.name, result.data)
-        setSelectedTable(file.name)
-      },
-      header: true,
-      error: () => {
-        toast.error("Error parsing CSV file")
-      },
-    })
-  }
-
   useEffect(() => {
     const handleScroll = () => {
       if (textareaRef.current && highlightedDivRef.current) {
@@ -181,21 +156,6 @@ function QueryInput() {
             <span>Format Query</span>
           </button>
         
-        </div>
-      </div>
-      {/* CSV Upload and Conversion Section */}
-      <div className={styles.buttonContainer}>
-        <div className={styles.rectangularButtons}>
-          <input
-            type="file"
-            id="csvUpload"
-            accept=".csv"
-            onChange={handleFileUpload}
-            className={styles.hiddenFileInput}
-          />
-          <label htmlFor="csvUpload" className={styles.button}>
-            Upload CSV
-          </label>
         </div>
       </div>
     </div>
