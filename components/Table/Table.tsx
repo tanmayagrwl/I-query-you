@@ -1,15 +1,9 @@
 import React, { useState } from "react"
 import styles from "./table.module.css"
 import { useStore } from "@/store/useStore"
-import {
-  Search,
-  X,
-  ChevronLeft,
-  ChevronRight,
-  ChevronsLeft,
-  ChevronsRight,
-} from "lucide-react"
+import { Search, X } from "lucide-react"
 import UploadCsvButton from "./UploadCsvButton"
+import Pagination from "./Pagination"
 
 function Table() {
   const { tables, selectedTable } = useStore()
@@ -26,25 +20,13 @@ function Table() {
         )
       : []
 
-  // Pagination logic
   const totalRows = filteredRows.length
   const totalPages = Math.ceil(totalRows / rowsPerPage)
-
-  // Get current rows
   const indexOfLastRow = currentPage * rowsPerPage
   const indexOfFirstRow = indexOfLastRow - rowsPerPage
   const currentRows = filteredRows.slice(indexOfFirstRow, indexOfLastRow)
 
-  // Change page
   const paginate = (pageNumber: number) => setCurrentPage(pageNumber)
-  const goToFirstPage = () => paginate(1)
-  const goToLastPage = () => paginate(totalPages)
-  const goToNextPage = () => {
-    if (currentPage < totalPages) paginate(currentPage + 1)
-  }
-  const goToPrevPage = () => {
-    if (currentPage > 1) paginate(currentPage - 1)
-  }
 
   const highlightMatch = (text: string) => {
     if (!searchTerm) return text
@@ -68,9 +50,8 @@ function Table() {
         {selectedTable && tables[selectedTable] && (
           <>
             <div className={styles.csvTableWrapper}>
-
               <div className={styles.searchSection}>
-              <UploadCsvButton />
+                <UploadCsvButton />
 
                 <div className={styles.searchInputContainer}>
                   <Search />
@@ -127,69 +108,13 @@ function Table() {
           </>
         )}
       </div>
-      <div className={styles.paginationControls}>
-        <div className={styles.paginationInfo}>
-          Showing {indexOfFirstRow + 1} to {Math.min(indexOfLastRow, totalRows)}{" "}
-          of {totalRows} entries
-        </div>
-
-        <div className={styles.paginationButtons}>
-          <button
-            onClick={goToFirstPage}
-            disabled={currentPage === 1}
-            className={styles.paginationButton}
-          >
-            <ChevronsLeft size={16} />
-          </button>
-          <button
-            onClick={goToPrevPage}
-            disabled={currentPage === 1}
-            className={styles.paginationButton}
-          >
-            <ChevronLeft size={16} />
-          </button>
-
-          {Array.from({ length: Math.min(3, totalPages) }, (_, i) => {
-            let pageNumber
-            if (totalPages <= 5) {
-              pageNumber = i + 1
-            } else if (currentPage <= 3) {
-              pageNumber = i + 1
-            } else if (currentPage >= totalPages - 2) {
-              pageNumber = totalPages - 4 + i
-            } else {
-              pageNumber = currentPage - 2 + i
-            }
-
-            return (
-              <button
-                key={pageNumber}
-                onClick={() => paginate(pageNumber)}
-                className={`${styles.paginationButton} ${
-                  currentPage === pageNumber ? styles.activePage : ""
-                }`}
-              >
-                {pageNumber}
-              </button>
-            )
-          })}
-
-          <button
-            onClick={goToNextPage}
-            disabled={currentPage === totalPages}
-            className={styles.paginationButton}
-          >
-            <ChevronRight size={16} />
-          </button>
-          <button
-            onClick={goToLastPage}
-            disabled={currentPage === totalPages}
-            className={styles.paginationButton}
-          >
-            <ChevronsRight size={16} />
-          </button>
-        </div>
-      </div>
+      <Pagination
+        currentPage={currentPage}
+        totalPages={totalPages}
+        totalRows={totalRows}
+        rowsPerPage={rowsPerPage}
+        paginate={paginate}
+      />
     </div>
   )
 }
