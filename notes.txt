@@ -1,4 +1,0 @@
-add export table option - json and sql
-add name query
-fix site getting slow
-make it completely dark mode
