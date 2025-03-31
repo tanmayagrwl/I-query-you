@@ -1,7 +1,6 @@
 import React from "react"
 import { toast } from "sonner"
 import styles from "./table.module.css"
-import { Download } from "lucide-react"
 
 interface DownloadCsvButtonProps {
   selectedTable: string | null
@@ -73,12 +72,9 @@ const DownloadCsvButton: React.FC<DownloadCsvButtonProps> = ({
         className={styles.button}
         title="Download CSV"
       >
-        <div className={styles.downloadButton}>
-       <Download size={15}/> Download CSV
-       </div>
+        <div className={styles.downloadButton}> Download CSV</div>
       </button>
     </div>
-
   )
 }
 

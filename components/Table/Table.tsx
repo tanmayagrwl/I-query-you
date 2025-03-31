@@ -89,13 +89,7 @@ function Table() {
           <>
             <div className={styles.csvTableWrapper}>
               <div className={styles.searchSection}>
-                <UploadCsvButton />
-                <DownloadCsvButton
-                  selectedTable={selectedTable}
-                  tables={tables}
-                  filteredRows={filteredRows}
-                  searchTerm={searchTerm}
-                />
+
                 <div className={styles.searchInputContainer}>
                   <Search />
                   <input
@@ -110,7 +104,17 @@ function Table() {
                   />
                   <X onClick={() => setSearchTerm("")} />
                 </div>
+                <span className={styles.buttonGroup}>
+                <UploadCsvButton />
+                <DownloadCsvButton
+                  selectedTable={selectedTable}
+                  tables={tables}
+                  filteredRows={filteredRows}
+                  searchTerm={searchTerm}
+                />
+                </span>
               </div>
+              
               <div className={styles.csvTableContainer}>
                 <table className={styles.csvTable}>
                   <thead>
