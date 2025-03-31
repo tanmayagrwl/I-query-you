@@ -103,6 +103,7 @@ function QueryInput() {
           onChange={(e) => setQuery(e.target.value)}
         />
       </div>
+      <div className={styles.selectContainer}>
       <select
         name="tables"
         id="tables"
@@ -162,6 +163,7 @@ function QueryInput() {
           </button>
         </div>
       </div>
+    </div>
     </div>
   )
 }
