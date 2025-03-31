@@ -1,13 +1,14 @@
-import React, { useState } from "react"
+import React, { useEffect, useState } from "react"
 import styles from "./table.module.css"
 import { useStore } from "@/store/useStore"
 import { Search, X } from "lucide-react"
 import UploadCsvButton from "./UploadCsvButton"
 import Pagination from "./Pagination"
 import DownloadCsvButton from "./DownloadCsvButton"
-
+import { toast } from "sonner"
+import Papa from "papaparse";
 function Table() {
-  const { tables, selectedTable } = useStore()
+  const { tables, selectedTable, addTable, setSelectedTable } = useStore()
   const [searchTerm, setSearchTerm] = useState("")
   const [currentPage, setCurrentPage] = useState(1)
   const [rowsPerPage] = useState(10)
@@ -44,6 +45,42 @@ function Table() {
         )
       )
   }
+
+  const defaultFile = async () => {
+    try {
+      Papa.parse(
+        "https://raw.githubusercontent.com/mwaskom/seaborn-data/master/iris.csv",
+        {
+          download: true,
+          header: true,
+          complete: (result) => {
+            if (result.data && result.data.length > 0) {
+              addTable("default.csv", result.data)
+              setSelectedTable("default.csv")
+            } else {
+              toast.error("The CSV file appears to be empty")
+            }
+          },
+          error: (error) => {
+            toast.error(`Error parsing CSV file: ${error.message}`)
+          },
+        }
+      )
+    } catch (error) {
+      toast.error(
+        `Failed to load default CSV file: ${
+          error instanceof Error ? error.message : "Unknown error"
+        }`
+      )
+    }
+  }
+
+  useEffect(() => {
+    defaultFile()
+  })
+
+
+
 
   return (
     <div>
