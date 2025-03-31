@@ -1,7 +1,7 @@
 # iQueryYou
 
 ## Overview
-I Query You is a web-based, UI-focused query execution application designed to simplify database interactions. The application provides an intuitive interface for writing, executing, and managing SQL queries with powerful data visualization capabilities.
+I Query You is a web-based, UI-focused dummy query execution application designed to simplify database interactions. The application provides an intuitive interface for writing, executing, and managing SQL queries with powerful data visualization capabilities.
 
 ## Key Features
 - **Query Writing & Execution**
