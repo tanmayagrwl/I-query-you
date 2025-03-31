@@ -34,13 +34,13 @@ I Query You is a web-based, UI-focused dummy query execution application designe
     - **User Experience**:
         - Sonner for toast notifications
 
-        ## Project Resources
-        - **Documentation**:
-            - [ER Diagram](https://drive.google.com/file/d/1hnXTxjz8xHeVzmFcQHznD-FfWV8fjVCW/view?usp=sharing)
-            - [Architecture Diagram](https://drive.google.com/file/d/1q-byJXHy9MKQ6FtzOPDSnqpLRZl_d9xj/view?usp=drive_link)
-            - [Explanation Document](https://drive.google.com/file/d/177EaQ1TqOz5z7h9Hj-V-YNtLqvcRs5FC/view?usp=drive_link)
-        - **Demo**:
-            - [Demo Video](https://drive.google.com/file/d/1UWINBSZfMMAwa82FjOQ07aDkAPV9uEwu/view?usp=drive_link)
+## Project Resources
+- **Documentation**:
+    - [ER Diagram](https://drive.google.com/file/d/1hnXTxjz8xHeVzmFcQHznD-FfWV8fjVCW/view?usp=sharing)
+    - [Architecture Diagram](https://drive.google.com/file/d/1q-byJXHy9MKQ6FtzOPDSnqpLRZl_d9xj/view?usp=drive_link)
+    - [Explanation Document](https://drive.google.com/file/d/177EaQ1TqOz5z7h9Hj-V-YNtLqvcRs5FC/view?usp=drive_link)
+- **Demo**:
+    - [Demo Video](https://drive.google.com/file/d/1UWINBSZfMMAwa82FjOQ07aDkAPV9uEwu/view?usp=drive_link)
 
 ## Performance Metrics
 The application has been tested across multiple geographic locations using Lighthouse in Chrome DevTools:
