@@ -46,38 +46,41 @@ function Table() {
       )
   }
 
-  const defaultFile = async () => {
-    try {
-      Papa.parse(
-        "https://raw.githubusercontent.com/mwaskom/seaborn-data/master/iris.csv",
-        {
-          download: true,
-          header: true,
-          complete: (result) => {
-            if (result.data && result.data.length > 0) {
-              addTable("default.csv", result.data)
-              setSelectedTable("default.csv")
-            } else {
-              toast.error("The CSV file appears to be empty")
-            }
-          },
-          error: (error) => {
-            toast.error(`Error parsing CSV file: ${error.message}`)
-          },
-        }
-      )
-    } catch (error) {
-      toast.error(
-        `Failed to load default CSV file: ${
-          error instanceof Error ? error.message : "Unknown error"
-        }`
-      )
-    }
-  }
-
   useEffect(() => {
-    defaultFile()
-  })
+    if (Object.keys(tables).length === 0) {
+      const defaultFile = async () => {
+        try {
+          Papa.parse(
+            "https://raw.githubusercontent.com/mwaskom/seaborn-data/master/iris.csv",
+            {
+              download: true,
+              header: true,
+              complete: (result) => {
+                if (result.data && result.data.length > 0) {
+                  addTable("default.csv", result.data)
+                  setSelectedTable("default.csv")
+                } else {
+                  toast.error("The CSV file appears to be empty")
+                }
+              },
+              error: (error) => {
+                toast.error(`Error parsing CSV file: ${error.message}`)
+              },
+            }
+          )
+        } catch (error) {
+          toast.error(
+            `Failed to load default CSV file: ${
+              error instanceof Error ? error.message : "Unknown error"
+            }`
+          )
+        }
+      }
+      defaultFile()
+    }
+  }, [addTable, setSelectedTable, tables])
+
+
 
 
 
