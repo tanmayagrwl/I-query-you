@@ -190,3 +190,21 @@
     background-color: #2a2a2a;
     transform: scale(0.99);
 }
+
+.SidebarClose {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+@media screen and (min-width: 601px) {
+    .SidebarClose {
+        display: none;
+    }
+}
+
+@media screen and (max-width: 600px) {
+    .SidebarClose {
+        display: flex;
+    }
+}

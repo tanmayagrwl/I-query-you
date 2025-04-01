@@ -62,7 +62,7 @@ function QueryInput() {
       setName(activeQuery.name)
       setSelectedTable(activeQuery.table)
     } else {
-      setSelectedTable("employees")
+      setSelectedTable("default.csv")
     }
   }, [activeQuery, setSelectedTable])
 

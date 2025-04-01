@@ -18,7 +18,7 @@ function Sidebar({ sidebar, setSidebar }: SidebarProps) {
   return (
     <div className={`${styles.queryHistory} ${sidebar ? styles.enabled : ""}`}>
       <div className={styles.header}>
-        <SidebarClose onClick={() => setSidebar(false)} />
+        <SidebarClose onClick={() => setSidebar(false)} className={styles.SidebarClose} />
         <h1 className={styles.sidebarTitle}>Query History</h1>
       </div>
       <div className={styles.queryList}>
